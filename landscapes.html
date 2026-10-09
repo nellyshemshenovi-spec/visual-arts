@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Landscapes | Nelly Shemshenovi Photography</title>
+    <meta name="description" content="Natural Landscapes collection by Nelly Shemshenovi. Silent coastal shorelines and expansive horizons.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .viewer-main-container {
+            height: calc(100vh - 60px);
+            overflow: hidden;
+        }
+        .viewer-stage {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            height: 100%;
+            position: relative;
+        }
+        .viewer-stage-img-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            overflow: hidden;
+            max-height: calc(100vh - 180px);
+        }
+        .viewer-main-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+    </style>
+</head>
+<body class="viewer-page">
+
+    <!-- Top Navigation Bar -->
+    <header class="viewer-header-bar">
+        <a href="collections.html" class="viewer-back-link">&larr; Back to Collections</a>
+        <div class="viewer-title-group">
+            <h2>Natural Landscapes</h2>
+            <span class="viewer-counter" id="viewer-counter">01 / 16</span>
+        </div>
+        <button class="viewer-close-btn" onclick="window.location.href='collections.html'" title="Close Viewer">&times;</button>
+    </header>
+
+    <!-- Main Cinematic Viewer -->
+    <div class="viewer-main-container">
+        
+        <!-- Center Stage for Large Image -->
+        <main class="viewer-stage">
+            <button class="viewer-nav-btn viewer-nav-prev" onclick="changeSlide(-1)" aria-label="Previous Image">&#10094;</button>
+            
+           <div class="viewer-stage-img-wrap">
+    <img id="main-image" class="viewer-main-img" src="" alt="">
+         </div>
+            
+            <div id="image-caption" class="viewer-caption">Landscape View</div>
+
+            <button class="viewer-nav-btn viewer-nav-next" onclick="changeSlide(1)" aria-label="Next Image">&#10095;</button>
+        </main>
+
+        <!-- Thumbnails Sidebar (adapts to bottom carousel on mobile) -->
+        <aside class="viewer-thumbnails-panel" id="sidebar-thumbnails">
+            <!-- Thumbnails injected via JS -->
+        </aside>
+
+    </div>
+
+    <script>
+        const images = [
+            { src: "nature-images/L1.webp", title: "Natural Landscape I &bull; Golden Shore" },
+            { src: "nature-images/L2.webp", title: "Natural Landscape II &bull; Coastal Solitude" },
+            { src: "nature-images/L3.webp", title: "Natural Landscape III &bull; Ethereal Waters" },
+            { src: "nature-images/L4.webp", title: "Natural Landscape IV &bull; Whispering Waves" },
+            { src: "nature-images/L5.webp", title: "Natural Landscape V &bull; Distant Horizon" },
+            { src: "nature-images/L6.webp", title: "Natural Landscape VI &bull; Rocky Shoreline" },
+            { src: "nature-images/L7.webp", title: "Natural Landscape VII &bull; Tidal Drift" },
+            { src: "nature-images/L8.webp", title: "Natural Landscape VIII &bull; Twilight Ocean" },
+            { src: "nature-images/L9.webp", title: "Natural Landscape IX &bull; Coastal Grasses" },
+            { src: "nature-images/L10.webp", title: "Natural Landscape X &bull; Silent Coast" },
+            { src: "nature-images/L11.webp", title: "Natural Landscape XI &bull; Ocean Mist" },
+            { src: "nature-images/L12.webp", title: "Natural Landscape XII &bull; Horizon Radiance" },
+            { src: "nature-images/L13.webp", title: "Natural Landscape XIII &bull; Still Waters" },
+            { src: "nature-images/L14.webp", title: "Natural Landscape XIV &bull; Serene Horizon" },
+            { src: "nature-images/L15.webp", title: "Natural Landscape XV &bull; Fading Daylight" },
+            { src: "nature-images/L16.webp", title: "Natural Landscape XVI &bull; Marine Vastness" }
+        ];
+
+        let currentIndex = 0;
+
+        const mainImage = document.getElementById("main-image");
+        const imageCaption = document.getElementById("image-caption");
+        const viewerCounter = document.getElementById("viewer-counter");
+        const sidebarThumbnails = document.getElementById("sidebar-thumbnails");
+
+        function initLightbox() {
+            sidebarThumbnails.innerHTML = "";
+            images.forEach((img, index) => {
+                const thumb = document.createElement("div");
+                thumb.className = `viewer-thumb ${index === currentIndex ? 'active' : ''}`;
+                thumb.innerHTML = `<img src="${img.src}" alt="${img.title}" loading="lazy">`;
+                thumb.onclick = () => {
+                    currentIndex = index;
+                    updateLightbox();
+                };
+                sidebarThumbnails.appendChild(thumb);
+            });
+            updateLightbox();
+        }
+
+        function updateLightbox() {
+            mainImage.style.opacity = '0.3';
+            setTimeout(() => {
+                mainImage.src = images[currentIndex].src;
+                imageCaption.innerHTML = images[currentIndex].title;
+                const paddedIndex = String(currentIndex + 1).padStart(2, '0');
+                const paddedTotal = String(images.length).padStart(2, '0');
+                viewerCounter.innerText = `${paddedIndex} / ${paddedTotal}`;
+                mainImage.style.opacity = '1';
+            }, 120);
+
+            const thumbs = sidebarThumbnails.children;
+            for (let i = 0; i < thumbs.length; i++) {
+                if (i === currentIndex) {
+                    thumbs[i].classList.add("active");
+                    thumbs[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                } else {
+                    thumbs[i].classList.remove("active");
+                }
+            }
+        }
+
+        function changeSlide(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            updateLightbox();
+        }
+
+        // Keyboard navigation
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft") changeSlide(-1);
+            if (e.key === "ArrowRight") changeSlide(1);
+            if (e.key === "Escape") window.location.href = 'collections.html';
+        });
+
+        // Touch Swipe Navigation for Mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.querySelector('.viewer-stage').addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.querySelector('.viewer-stage').addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                changeSlide(1); // Swipe left -> next
+            } else if (touchEndX - touchStartX > 50) {
+                changeSlide(-1); // Swipe right -> prev
+            }
+        }, { passive: true });
+
+        window.onload = initLightbox;
+    </script>
+</body>
+</html>

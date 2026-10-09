@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Artwork Details | Nelly Shemshenovi Photography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="brand-wrapper">
+            <img src="logo.jpg" alt="Nelly Shemshenovi Logo" class="logo-img">
+            <h1 class="site-title">Nelly Shemshenovi</h1>
+            <span class="site-tagline">Fine Art Photography</span>
+        </a>
+        <nav class="main-nav">
+            <a href="index.html">Gallery</a>
+            <a href="collections.html">Collections</a>
+            <a href="prints.html">Prints</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main class="artwork-layout-container">
+        
+        <div class="artwork-breadcrumbs">
+            <a href="index.html">Gallery</a>
+            <span>&bull;</span>
+            <a href="prints.html">Prints</a>
+            <span>&bull;</span>
+            <span id="breadcrumb-title" style="color: var(--accent-gold);">Artwork Details</span>
+        </div>
+
+        <div class="artwork-page-grid">
+            
+            <!-- Left: Artwork Visual Column -->
+            <div class="artwork-visual-column">
+                <img src="" alt="Artwork" id="artwork-img" onclick="openZoomModal()">
+                <div class="artwork-zoom-hint">&#x2922; Click image to view fullscreen</div>
+            </div>
+            
+            <!-- Right: Details & Purchase Options Column -->
+            <div class="artwork-details-column">
+                <span class="artwork-badge">Archival Pigment Print &bull; Limited Edition</span>
+                
+                <h1 id="artwork-title" class="artwork-main-title">Artwork Title</h1>
+                <span class="artwork-artist-credit">By Nelly Shemshenovi &bull; Tbilisi, Georgia</span>
+                
+                <div class="artwork-price-display" id="artwork-price">Loading price...</div>
+                
+                <div class="size-selector-box">
+                    <div class="size-selector-header">Select Edition Size</div>
+                    <div class="size-buttons-group">
+                        <button class="size-btn" onclick="updatesize('Small (21x14 in / 53x35 cm)', 0.6, this)">Small (21&times;14 in)</button>
+                        <button class="size-btn" onclick="updatesize('Medium (30x20 in / 76x50 cm)', 0.8, this)">Medium (30&times;20 in)</button>
+                        <button class="size-btn active" onclick="updatesize('Large (36x24 in / 91x61 cm)', 1.0, this)">Large (36&times;24 in)</button>
+                    </div>
+                </div>
+
+                <div class="print-specs-list">
+                    <div class="spec-item">
+                        <span class="spec-icon">&#10022;</span>
+                        <span>Printed on 100% Cotton Rag Museum-Grade Fine Art Paper (310gsm)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-icon">&#10022;</span>
+                        <span>Archival pigment inks rated for 100+ years lightfastness</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-icon">&#10022;</span>
+                        <span>Individually signed and numbered with Certificate of Authenticity</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-icon">&#10022;</span>
+                        <span>Insured worldwide shipping rolled in heavy-duty protective art tube</span>
+                    </div>
+                </div>
+
+                <div class="artwork-actions-row">
+                    <a href="mailto:nellyshemshenovi@gmail.com" class="btn-gold" id="buy-btn">Inquire to Acquire This Print</a>
+                </div>
+
+                <div class="artwork-story-section">
+                    <h3 class="artwork-story-title">Artwork Story &amp; Notes</h3>
+                    <div class="artwork-story-text" id="artwork-desc"></div>
+                </div>
+
+                <div class="artwork-nav-pagination">
+                    <a href="#" id="prev-artwork-btn" class="artwork-nav-btn">&larr; Previous Piece</a>
+                    <a href="index.html" class="artwork-nav-btn">All Gallery</a>
+                    <a href="#" id="next-artwork-btn" class="artwork-nav-btn">Next Piece &rarr;</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Fullscreen Zoom Modal -->
+    <div id="zoom-modal" class="zoom-modal" onclick="closeZoomModal()">
+        <button class="zoom-modal-close" onclick="closeZoomModal()">&times;</button>
+        <img id="zoom-modal-img" src="" alt="Fullscreen Artwork">
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <span class="footer-brand">Nelly Shemshenovi Photography</span>
+            <div class="footer-nav">
+                <a href="index.html">Gallery</a>
+                <a href="collections.html">Collections</a>
+                <a href="prints.html">Prints</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-divider"></div>
+            <p class="footer-copy">&copy; 2026 Nelly Shemshenovi Photography. All rights reserved. Fine Art Prints &amp; Photography.</p>
+        </div>
+        
+    </footer>
+
+    <script>
+        const artworksData = [
+            {
+                title: '"Dreams in Pastel Blue" Fine Art Print',
+                image: 'images/painting1.webp',
+                priceType: 'Original Print',
+                price: 1399,
+                desc: "This piece is a centerpiece of my 'Ethereal' series, where I explore the boundaries between reality and dreams. By combining coastal landscapes with surreal elements like floating balloons, I aim to evoke a sense of weightlessness and serene escape.<br><br>The soft, lavender and pastel blue tones were achieved through meticulous color manipulation in Adobe Photoshop, creating a velvety atmosphere that transforms a simple seascape into a 'dreamscape.' This work is about finding peace in the impossible and the beauty of a quiet, wandering mind."
+            },
+            {
+                title: '"Blue Abyssal" Fine Art Print',
+                image: 'images/painting2.webp',
+                priceType: 'Original Print',
+                price: 840,
+                desc: "The Blue Portal' is a conceptual photography piece that explores the boundaries of surrealism and tranquility. By placing a vibrant blue sphere within a serene coastal landscape, I aim to create a 'dreamscape' where reality and imagination meet. This work is part of my 'Ethereal' series, crafted to evoke a sense of peace and wonder. Created using digital manipulation to achieve a soft, velvety atmosphere, it is perfect for modern, minimalist spaces."
+            },
+            {
+                title: '"Gloom & Glare" Fine Art Print',
+                image: 'images/painting3.webp',
+                priceType: 'Original Print',
+                price: 960,
+                desc: "Part of the 'Ethereal' series, this piece captures a moment of profound contrast where a restless, dramatic sky meets the absolute stillness of the sea. It is a visual exploration of inner peace amidst an approaching storm. By blending surreal tones with a minimalist composition, I aim to create a dreamscape that feels both haunting and tranquil, inviting the viewer to look beyond the horizon of reality."
+            },
+            {
+                title: '"Abstract Harmony" Fine Art Print',
+                image: 'images/painting4.webp',
+                priceType: 'Original Print',
+                price: 760,
+                desc: "Surreal botanical composition blending dark aesthetic concepts with exquisite light play. A meditation on balance and nocturnal tranquility in an imaginary garden space."
+            },
+            {
+                title: '"Midnight Bloom" Photograph',
+                image: 'images/painting5.webp',
+                priceType: 'Original Photograph',
+                price: 1790,
+                desc: "A captivating study of nature in its most silent hour. These deep blue petals emerge from the shadows, creating a sense of calm and mystery. This piece explores the hidden beauty of the nocturnal world, where colors shift and the ordinary becomes ethereal."
+            },
+            {
+                title: '"Crystalline Silence" Photograph',
+                image: 'images/painting6.webp',
+                priceType: 'Original Photograph',
+                price: 1490,
+                desc: "A conceptual piece focusing on dark aesthetics. A captivating exploration of botanical textures under a deep, indigo-hued twilight. This piece from the 'Shadow & Bloom' series captures the ethereal beauty of frozen moments in nature. The interplay of sharp details and deep, shadowy tones creates a sophisticated atmosphere, perfect for minimalist and modern interior spaces that embrace a moody, artistic aesthetic."
+            },
+            {
+                title: '"Midnight Bloom in the Digital Forest" Photograph',
+                image: 'images/painting7.webp',
+                priceType: 'Original Photograph',
+                price: 1590,
+                desc: "This piece is a deep dive into my exploration of mystical and atmospheric visual stories. Rooted in a fine arts background, this work captures a surreal moment where nature meets digital imagination. The interplay of deep, moody greens and the piercing glow of azure flora creates a sense of quiet mystery, characteristic of my focus on surreal and atmospheric digital art. It is an invitation to look beyond the surface of the natural world and into a space of dreamlike stillness."
+            },
+            {
+                title: '"Tranquil Indigo" Photograph',
+                image: 'images/painting8.webp',
+                priceType: 'Original Photograph',
+                price: 1890,
+                desc: "Part of the 'Ethereal' series, 'Tranquil Indigo' invites the viewer into a silent, moonlit world. This conceptual piece captures the mysterious beauty of a meadow at twilight, where the flowers seem to glow with a soft, inner light. The deep indigo tones create a sense of profound calm and introspection. It is a visual meditation on the quiet moments of nature that often go unnoticed, transformed into a surreal dreamscape."
+            },
+            {
+                title: '"The Silent Gathering" Fine Art Print',
+                image: 'images/painting9.webp',
+                priceType: 'Original Photograph',
+                price: 1090,
+                desc: "This atmospheric piece captures a cluster of wild purple blooms, standing tall in the quiet, filtered light of a misty morning. The deep purples and muted greens create a sense of calm and introspection, blurring the line between a simple botanical shot and a surrealist visual story. It is a study of texture, repetition, and the soft elegance of the Georgian landscape."
+            },
+            {
+                title: '"Violet Reflections" Fine Art Print',
+                image: 'images/painting10.webp',
+                priceType: 'Original Print',
+                price: 1140,
+                desc: "A surreal digital composition where nature meets abstract imagination. This piece blends the delicate textures of a violet bloom with a misty, ethereal landscape, creating a sense of a hidden, celestial world. Part of a series exploring digital manipulation and the 'Aesthetic' of urban mysticism."
+            },
+            {
+                title: '"Violet Reflections II" Fine Art Print',
+                image: 'images/painting11.webp',
+                priceType: 'Original Print',
+                price: 2000,
+                desc: "In the depths of the 'Blue Hour', a single red poppy emerges as a symbol of resilience and vivid imagination. This piece explores the 'Limit' between the dark, moody shadows of nature and the sudden burst of life, where the deep emerald foliage meets the sharp, cinematic red of the poppy. It is a visual story about finding light and color in the most mysterious corners of the garden."
+            },
+            {
+                title: '"Glimmer in the Dark" Fine Art Print',
+                image: 'images/painting12.webp',
+                priceType: 'Original Print',
+                price: 1700,
+                desc: "A moody and atmospheric study of nocturnal nature. Delicate white blossoms emerge from a deep, textured background of dark greens, creating a captivating contrast of light and shadow. This photograph captures a silent, intimate moment from a hidden world."
+            },
+            {
+                title: '"The Fragile Hold" Fine Art Print',
+                image: 'images/painting13.webp',
+                priceType: 'Original Print',
+                price: 1400,
+                desc: "A soul-stirring monochrome study of the human connection with nature. This piece captures a fleeting moment of tenderness, where the delicate petals of a lily are cradled in a gentle grasp. The soft light and grainy texture evoke a sense of nostalgia and quiet introspection. Part of a series exploring the intimacy of botanical forms."
+            },
+            {
+                title: '"Vintage Dream" Fine Art Print',
+                image: 'images/painting14.webp',
+                priceType: 'Original Print',
+                price: 1400,
+                desc: "This is a poetic exploration of memory and the fleeting nature of beauty. This monochrome fine art photograph captures a moment of pure intimacy, where a delicate bloom is gently cradled, symbolizing a deep, soulful connection to the natural world. Unlike its darker counterpart, this edition features a soft, high-key palette and a rich, grainy texture that evokes a sense of vintage nostalgia and timelessness."
+            },
+            {
+                title: '"Silent Uprising" Fine Art Print',
+                image: 'images/painting15.webp',
+                priceType: 'Original Print',
+                price: 2000,
+                desc: "Silent Uprising is a compelling piece from the Urban Mysticism series, where the delicate nature of botanical forms meets the raw, gritty energy of the city. This work is a visual manifestation of internal resistance—a quiet yet powerful uprising against the mundane and the expected."
+            },
+            {
+                title: '"Midnight Bloom in the Digital Forest II" Fine Art Print',
+                image: 'images/painting16.webp',
+                priceType: 'Original Print',
+                price: 1700,
+                desc: "This piece is a deep dive into my exploration of mystical and atmospheric visual stories. Rooted in a fine arts background, this work captures a surreal moment where nature meets digital imagination. The interplay of deep, moody greens and the piercing glow of azure flora creates a sense of quiet mystery."
+            },
+            {
+                title: '"Midnight Blooms: A Study in Shadows" Fine Art Print',
+                image: 'images/painting17.webp',
+                priceType: 'Original Print',
+                price: 2000,
+                desc: "This fine art photograph explores the ethereal beauty of nature hidden in the depths of twilight. Captured with a focus on dramatic contrast and Floral Noir aesthetics, the piece reveals the intricate textures and silent elegance of blossoms emerging from a moody, deep-blue void."
+            },
+            {
+                title: '"Gravity of the Blue" Fine Art Print',
+                image: 'images/painting18.webp',
+                priceType: 'Original Print',
+                price: 1900,
+                desc: "This vertical piece captures the structural beauty of wild flora against a dark, moody environment. Drawing on my background in fine arts and photography, I focused on the stark contrast and the deep, saturated tones of the landscape."
+            },
+            {
+                title: '"Veiled Narcissus" Fine Art Print',
+                image: 'images/painting19.webp',
+                priceType: 'Original Print',
+                price: 890,
+                desc: "This piece is a visual narrative of the delicate encounter between spring’s fragility and a lingering wintry chill. The narcissus, a traditional symbol of rebirth, is captured behind a veil of glacial mist, creating a sense of a moment frozen in time."
+            },
+            {
+                title: '"Gothic Botanical" Fine Art Print',
+                image: 'images/painting20.webp',
+                priceType: 'Original Print',
+                price: 980,
+                desc: "A mesmerizing exploration of color and light, transforming a delicate floral scene into a surreal, blue-toned landscape. This piece challenges the viewer's perception of nature through artistic digital manipulation and high-contrast textures."
+            },
+            {
+                title: '"Summer Gothic: The Wilted Sun" Fine Art Print',
+                image: 'images/painting21.webp',
+                priceType: 'Original Print',
+                price: 1080,
+                desc: "A haunting exploration of botanical forms through the lens of 'Summer Gothic.' This piece captures the eerie, silent beauty of nature when stripped of its typical warmth. The heavy grain and desaturated tones evoke a sense of nostalgia and mystery, turning a simple summer flower into a relic of a dark, forgotten garden."
+            },
+            {
+                title: '"Summer Melancholia" Fine Art Print',
+                image: 'images/painting22.webp',
+                priceType: 'Original Print',
+                price: 1260,
+                desc: "A lone wilted flora standing witness to the end of a 'Summer Gothic.' Part of a portfolio exploring dark nature, still life, and impermanence. This fine art print utilizes grain and heavy contrast to create a moody, atmospheric tableau, preserving a single moment of botanical grace in a dark woodland setting."
+            },
+            {
+                title: '"The Resilience of Red" Fine Art Print',
+                image: 'images/painting23.webp',
+                priceType: 'Original Print',
+                price: 980,
+                desc: "A captivating fine art photograph featuring a single, vibrant red poppy set against a moody, dark meadow. The deep greens and shadowy tones of the background create a cinematic atmosphere, making the scarlet petals appear almost luminous. This piece captures a fleeting moment of natural elegance, symbolizing hope and resilience amidst the darkness."
+            },
+            {
+                title: '"Golden Horizon" Fine Art Print',
+                image: 'images/painting24.webp',
+                priceType: 'Original Print',
+                price: 1080,
+                desc: "A serene coastal landscape that captures the quiet warmth of a fading day. The textured golden grasses in the foreground create a tactile contrast against the endless, calm expanse of the sea and the soft, glowing horizon. This piece is a visual meditation on solitude, distance, and the timeless rhythm of nature."
+            },
+            {
+                title: '"Azure Serenity: Midsummer Dream" Fine Art Print',
+                image: 'images/painting25.webp',
+                priceType: 'Original Print',
+                price: 990,
+                desc: "Azure Serenity: Midsummer Dream is a visual meditation on the ethereal beauty of summer. The piece features delicate blooms suspended against a vibrant, sun-drenched sky, treated with a painterly texture that blurs the line between photography and fine art."
+            },
+            {
+                title: '"The Resilience of Red II" Fine Art Print',
+                image: 'images/painting26.webp',
+                priceType: 'Original Print',
+                price: 1480,
+                desc: "A striking fine art photograph capturing a single red poppy emerging from a sea of deep, dark foliage. The high contrast between the vivid scarlet petals and the moody, desaturated background creates a sense of isolation and fragile strength. This piece explores the theme of individuality and beauty in unexpected places."
+            },
+            {
+                title: "Still Life: Perpetuity Photograph",
+                image: "images/painting27.webp",
+                priceType: "Original Print",
+                price: 860,
+                desc: "Still Life: Perpetuity' is a visual translation of memory fading into eternal night. Capturing a solitary, detailed dried botanical sentinel against a deep void, this fine art photograph utilizes grain and moody lighting to create a cinematic atmosphere. Part of the 'Eternal Flora' series, this print is an exploration of abstract nature, preservation, and the serene beauty of decline."
+                },
+            {
+               title: "Frozen Summer Photograph",
+                image: "images/painting28.webp",
+                priceType: "Original Print",
+                price: 1040,
+                desc: "Exploring the 'Summer Gothic' aesthetic—where the vibrant energy of the season meets a cold, mystical stillness. This work reinterprets traditional botanical photography by removing the warmth of the sun, leaving behind the haunting beauty of a silent, frozen garden."
+                },
+            {
+               title: "The Velvet Touch Fine Art Print",
+                image: "images/painting29.webp",
+                priceType: "Original Print",
+                price: 980,
+                desc: "An intimate and poetic fine art photograph capturing the delicate beauty of a red rose held gently in hand. Bathed in a dramatic, moody light with deep shadows, this piece explores the tender connection between human touch and nature's fleeting moments. The rich, velvety red tones contrast beautifully with the dark, atmospheric background, creating a timeless and deeply emotional visual narrative. Perfect for contemporary spaces looking for a sophisticated, expressive statement piece."
+                },
+            {
+                 title: "Hidden in Darkness Photograph",
+                image: "images/painting30.webp",
+                priceType: "Original Print",
+                price: 1100,
+                desc: "A moody, atmospheric shot of white blossoms emerging from the deep shadows of night. This piece explores the theme of urban mysticism, capturing the silent beauty found in the darkness of nature."
+                },
+            {
+                title: "Nocturnal Iris Photograph",
+                image: "images/painting31.webp",
+                priceType: "Original Print",
+                price: 980,
+                desc: "Nocturnal Iris is a fine art photograph that captures the quiet, haunting mysticism of nature hidden within the shadows. Shot with a high-resolution 6000 x 4000 px sensor, this piece delicately balances the soft, intricate texture of iris petals against a deep, somber, and cinematic background."
+                },
+            {
+                 title: "The Living Forest Photograph",
+                image: "images/painting32.webp",
+                priceType: "Original Print",
+                price: 1200,
+                desc: "A crisp, high-resolution botanical photograph capturing the lush complexity of evergreen branches. Shot in natural light, the image highlights the vibrant green tones, fresh organic growth, and intricate textures of the pine needles. This clean, classical nature study brings a refreshing, serene, and lively atmosphere into any contemporary interior."
+                },
+            {
+               title: "The Obsidian Coastline Photograph",
+                image: "images/painting33.webp",
+                priceType: "Original Print",
+                price: 1800,
+                desc: "A vast, sweeping vista capturing a coastline where the dark volcanic rocks merge with a churning, dark sea under a low, indigo sky. This evokes the raw, untamed power of nature, similar to the 'Indigo' aesthetic."
+                },
+            { 
+               title: "The Heavy Breath of the Sea Photograph",
+                image: "images/painting34.webp",
+                priceType: "Original Print",
+                price: 1000,
+                desc: "A moody fine-art capture of a desolate shoreline where deep indigo waters meet the muted sand. This piece evokes a sense of quiet longing and the raw, melancholic beauty of the untamed coast."
+                },
+            { 
+                title: "A quiet loss of form Photograph",
+                image: "images/painting35.webp",
+                priceType: "Original Print",
+                price: 1080,
+                desc: "Lost in the shadows of a forgotten season. This piece evokes a heavy, atmospheric sorrow where form and memory slowly bleed away into the dark."
+                },
+        ];
+
+        const urlParams = new URLSearchParams(window.location.search);
+        let artIndex = parseInt(urlParams.get('id'), 10);
+        if (isNaN(artIndex) || artIndex < 0 || artIndex >= artworksData.length) {
+            artIndex = 0;
+        }
+
+        const art = artworksData[artIndex];
+        let currentBasePrice = art.price;
+        let selectedSizeText = 'Large (36x24 in / 91x61 cm)';
+        let currentPrice = art.price;
+
+        // Populate elements
+        document.getElementById('page-title').innerText = art.title + ' | Nelly Shemshenovi Photography';
+        document.getElementById('breadcrumb-title').innerText = art.title;
+        document.getElementById('artwork-img').src = art.image;
+        document.getElementById('artwork-title').innerText = art.title;
+        document.getElementById('artwork-desc').innerHTML = art.desc;
+        document.getElementById('zoom-modal-img').src = art.image;
+        
+        updatePriceDisplay();
+
+        // Prev / Next Pagination links
+        const prevIndex = (artIndex - 1 + artworksData.length) % artworksData.length;
+        const nextIndex = (artIndex + 1) % artworksData.length;
+        document.getElementById('prev-artwork-btn').href = 'artwork.html?id=' + prevIndex;
+        document.getElementById('next-artwork-btn').href = 'artwork.html?id=' + nextIndex;
+
+        function updatePriceDisplay() {
+            document.getElementById('artwork-price').innerText = '$' + currentPrice.toLocaleString() + ' USD';
+            
+            // Update mailto inquiry button
+            const subject = encodeURIComponent('Acquisition Inquiry: ' + art.title);
+            const body = encodeURIComponent(
+                'Hello Nelly,\n\n' +
+                'I am interested in acquiring the fine art print:\n' +
+                'Piece: ' + art.title + '\n' +
+                'Selected Size: ' + selectedSizeText + '\n' +
+                'Price: $' + currentPrice.toLocaleString() + ' USD\n\n' +
+                'Please share information regarding edition availability, shipping timeframe, and payment details.\n\n' +
+                'Best regards,'
+            );
+            document.getElementById('buy-btn').href = 'mailto:nellyshemshenovi@gmail.com?subject=' + subject + '&body=' + body;
+        }
+
+        function updatesize(sizeText, multiplier, btn) {
+            selectedSizeText = sizeText;
+            currentPrice = Math.round(currentBasePrice * multiplier);
+            updatePriceDisplay();
+
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function openZoomModal() {
+            document.getElementById('zoom-modal').classList.add('active');
+        }
+
+        function closeZoomModal() {
+            document.getElementById('zoom-modal').classList.remove('active');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeZoomModal();
+            if (e.key === 'ArrowLeft') window.location.href = 'artwork.html?id=' + prevIndex;
+            if (e.key === 'ArrowRight') window.location.href = 'artwork.html?id=' + nextIndex;
+        });
+    </script>
+</body>
+</html>
