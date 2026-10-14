@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="artwork-actions-row">
-                    <a href="mailto:nellyshemshenovi@gmail.com" class="btn-gold" id="buy-btn">Inquire to Acquire This Print</a>
+                    <button type="button" class="btn-gold" id="buy-btn">Inquire to Acquire This Print</button>
                 </div>
 
                 <div class="artwork-story-section">
@@ -453,6 +453,56 @@
             if (e.key === 'ArrowLeft') window.location.href = 'artwork.html?id=' + prevIndex;
             if (e.key === 'ArrowRight') window.location.href = 'artwork.html?id=' + nextIndex;
         });
+        const modal = document.getElementById("inquireModal");
+  const buyBtn = document.getElementById("buy-btn");
+  const closeBtn = document.querySelector(".close-btn");
+
+  if (buyBtn && modal) {
+    buyBtn.addEventListener("click", function() {
+      modal.style.display = "block";
+    });
+  }
+
+  if (closeBtn && modal) {
+    closeBtn.addEventListener("click", function() {
+      modal.style.display = "none";
+    });
+  }
+
+  window.addEventListener("click", function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
     </script>
+    <!-- Inquire Modal Form -->
+<div id="inquireModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h3 style="margin-top: 0; color: #c5a059;">Inquire About This Print</h3>
+    <form action="https://formsubmit.co/nellyshemshenovi@gmail.com" method="POST">
+      <input type="hidden" name="_subject" id="modalSubject" value="New Artwork Inquiry">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+
+      <div class="form-group">
+        <label for="inquire-name">Your Name</label>
+        <input type="text" id="inquire-name" name="name" required placeholder="John Doe">
+      </div>
+
+      <div class="form-group">
+        <label for="inquire-email">Your Email</label>
+        <input type="email" id="inquire-email" name="email" required placeholder="john@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="inquire-message">Message</label>
+        <textarea id="inquire-message" name="message" rows="4" required placeholder="I am interested in acquiring this print..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-gold" style="width: 100%; margin-top: 10px; cursor: pointer;">Send Inquiry</button>
+    </form>
+  </div>
+</div>
 </body>
 </html>
