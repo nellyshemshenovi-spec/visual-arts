@@ -116,6 +116,36 @@
         <img id="zoom-modal-img" src="" alt="Fullscreen Artwork">
     </div>
 
+    <!-- Inquire Modal Form -->
+    <div id="inquireModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3 style="margin-top: 0; color: #c5a059;">Inquire About This Print</h3>
+        <form action="https://formsubmit.co/nellyshemshenovi@gmail.com" method="POST">
+          <input type="hidden" name="_subject" id="modalSubject" value="New Artwork Inquiry">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+
+          <div class="form-group">
+            <label for="inquire-name">Your Name</label>
+            <input type="text" id="inquire-name" name="name" required placeholder="John Doe">
+          </div>
+
+          <div class="form-group">
+            <label for="inquire-email">Your Email</label>
+            <input type="email" id="inquire-email" name="email" required placeholder="john@example.com">
+          </div>
+
+          <div class="form-group">
+            <label for="inquire-message">Message</label>
+            <textarea id="inquire-message" name="message" rows="4" required placeholder="I am interested in acquiring this print..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-gold" style="width: 100%; margin-top: 10px; cursor: pointer;">Send Inquiry</button>
+        </form>
+      </div>
+    </div>
+
     <footer class="site-footer">
         <div class="footer-content">
             <span class="footer-brand">Nelly Shemshenovi Photography</span>
@@ -128,7 +158,6 @@
             <div class="footer-divider"></div>
             <p class="footer-copy">&copy; 2026 Nelly Shemshenovi Photography. All rights reserved. Fine Art Prints &amp; Photography.</p>
         </div>
-        
     </footer>
 
     <script>
@@ -358,14 +387,14 @@
                 desc: "A crisp, high-resolution botanical photograph capturing the lush complexity of evergreen branches. Shot in natural light, the image highlights the vibrant green tones, fresh organic growth, and intricate textures of the pine needles. This clean, classical nature study brings a refreshing, serene, and lively atmosphere into any contemporary interior."
                 },
             {
-               title: "The Obsidian Coastline Photograph",
+                 title: "The Obsidian Coastline Photograph",
                 image: "images/painting33.webp",
                 priceType: "Original Print",
                 price: 1800,
                 desc: "A vast, sweeping vista capturing a coastline where the dark volcanic rocks merge with a churning, dark sea under a low, indigo sky. This evokes the raw, untamed power of nature, similar to the 'Indigo' aesthetic."
                 },
             { 
-               title: "The Heavy Breath of the Sea Photograph",
+                 title: "The Heavy Breath of the Sea Photograph",
                 image: "images/painting34.webp",
                 priceType: "Original Print",
                 price: 1000,
@@ -416,19 +445,6 @@
 
         function updatePriceDisplay() {
             document.getElementById('artwork-price').innerText = '$' + currentPrice.toLocaleString() + ' USD';
-            
-            // Update mailto inquiry button
-            const subject = encodeURIComponent('Acquisition Inquiry: ' + art.title);
-            const body = encodeURIComponent(
-                'Hello Nelly,\n\n' +
-                'I am interested in acquiring the fine art print:\n' +
-                'Piece: ' + art.title + '\n' +
-                'Selected Size: ' + selectedSizeText + '\n' +
-                'Price: $' + currentPrice.toLocaleString() + ' USD\n\n' +
-                'Please share information regarding edition availability, shipping timeframe, and payment details.\n\n' +
-                'Best regards,'
-            );
-            document.getElementById('buy-btn').href = 'mailto:nellyshemshenovi@gmail.com?subject=' + subject + '&body=' + body;
         }
 
         function updatesize(sizeText, multiplier, btn) {
@@ -453,56 +469,36 @@
             if (e.key === 'ArrowLeft') window.location.href = 'artwork.html?id=' + prevIndex;
             if (e.key === 'ArrowRight') window.location.href = 'artwork.html?id=' + nextIndex;
         });
+
+        // Inquire modal toggle logic
         const modal = document.getElementById("inquireModal");
-  const buyBtn = document.getElementById("buy-btn");
-  const closeBtn = document.querySelector(".close-btn");
+        const buyBtn = document.getElementById("buy-btn");
+        const closeBtn = document.querySelector(".close-btn");
 
-  if (buyBtn && modal) {
-    buyBtn.addEventListener("click", function() {
-      modal.style.display = "block";
-    });
-  }
+        if (buyBtn && modal) {
+          buyBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            const modalSubject = document.getElementById("modalSubject");
+            if (modalSubject && typeof art !== "undefined") {
+              modalSubject.value = "Inquiry: " + art.title + " (" + selectedSizeText + ")";
+            }
 
-  if (closeBtn && modal) {
-    closeBtn.addEventListener("click", function() {
-      modal.style.display = "none";
-    });
-  }
+            modal.style.display = "block";
+          });
+        }
 
-  window.addEventListener("click", function(event) {
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
-  });
+        if (closeBtn && modal) {
+          closeBtn.addEventListener("click", function() {
+            modal.style.display = "none";
+          });
+        }
+
+        window.addEventListener("click", function(event) {
+          if (event.target === modal) {
+            modal.style.display = "none";
+          }
+        });
     </script>
-    <!-- Inquire Modal Form -->
-<div id="inquireModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <h3 style="margin-top: 0; color: #c5a059;">Inquire About This Print</h3>
-    <form action="https://formsubmit.co/nellyshemshenovi@gmail.com" method="POST">
-      <input type="hidden" name="_subject" id="modalSubject" value="New Artwork Inquiry">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-
-      <div class="form-group">
-        <label for="inquire-name">Your Name</label>
-        <input type="text" id="inquire-name" name="name" required placeholder="John Doe">
-      </div>
-
-      <div class="form-group">
-        <label for="inquire-email">Your Email</label>
-        <input type="email" id="inquire-email" name="email" required placeholder="john@example.com">
-      </div>
-
-      <div class="form-group">
-        <label for="inquire-message">Message</label>
-        <textarea id="inquire-message" name="message" rows="4" required placeholder="I am interested in acquiring this print..."></textarea>
-      </div>
-
-      <button type="submit" class="btn-gold" style="width: 100%; margin-top: 10px; cursor: pointer;">Send Inquiry</button>
-    </form>
-  </div>
-</div>
 </body>
 </html>
